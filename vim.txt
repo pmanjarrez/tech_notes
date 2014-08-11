@@ -1,0 +1,313 @@
+VI
+
+CHANGE TO UPPERCASE/LOWERCASE
+COPY, CUT AND PASTE
+	TO/FROM CLIPBOARD
+INCREASE/DECREASE NUMBERS
+INDENT
+MARKERS
+MOVING AROUND
+MULTIPLE FILES
+RECORDING
+SEARCH AND REPLACE
+SESSIONS
+SPLIT SCREEN
+TIPS
+REFERENCES
+
+
+
+
+
+CHANGE TO UPPERCASE/LOWERCASE
+
+1 Select text you wish to modify.
+2 gU    (uppercase)
+  gu    (lowercase)
+
+
+
+
+
+COPY, CUT AND PASTE
+
+1   Position cursor where you want to begin copying/cutting
+2   v -or- V (for whole lines)
+3   Move cursor to the endo of what you want to copy/cut
+4   y (-yank- for copy) -or- d (-delete- for cut)
+5   Move cursor to where you would like to paste
+6   p (paste after the cursor) -or- P (paste before the cursor)
+
+:22,28y		Copy from line 22 to 28.
+22G"y28G	Copy from line 22 to 28.
+
+Multiple clipboards (naming copy buffer)
+    "<buffer_letter>y (or d) in step 4
+    "<buffer_letter>p (or P) in step 6
+
+
+TO/FROM CLIPBOARD
+
+Copy and Cut
+
+	"+yy	Copy current line.
+	"+2yy	Copy current + 1 line.
+	"+y+	Copy current + 1 line.
+	"+y2+	Copy current + 2 lines.
+	"+y10G	Copy from current until line 10.
+	3G"+y8G	Copy lines from 3 to 8.
+
+	:.y +	Copy current line.
+	:3,8y +
+
+	Replace "y" with "d" in the previous command to cut.
+
+Paste
+
+	"+p		Paste after cursor.
+	"+P		Paste before cursor.
+
+
+
+
+
+
+
+INCREASE/DECREASE NUMBERS
+
+These increase the next number to the right of the cursor (or the number under the cursor).
+
+ctrl+a	increase
+ctrl+x	decrease
+
+
+
+
+
+
+
+
+INDENT
+
+>> Indent line
+<< De-indent line
+5>> Indent 5 lines
+== Re-indent line
+
+Indenting blocks
+    Place cursor in starting or ending block character ({, }, [, ])
+        >% Increase indent
+        <% Decrease indent
+        =% Re-indent
+
+:4,8> Indent lines 4 to 8 (inclusive)
+:>42gg Indent from current position to line 42 (and places cursor in line 42)
+
+Using markers
+    ma Mark top of block to indent as marker "a"
+	>'a Indent from marker "a" to current location
+
+Variables
+	:expandtab		Use softtabspaces instead of tab characters
+	:shiftwidth=4	Indent by 4 spaces when using >>, <<, etc
+	:softtabstop=4	Indent by 4 spaces when pressing <TAB>
+	:autoindent		Keep indentation from previous line
+	:smartindent	Automatically inserts indentation in some cases
+	:cident			Like smartindent, but stricter and more customizable
+
+
+
+
+
+
+MARKERS
+
+mk set marker "k" (from a to z)
+'k move to the beggining of the line of marker "k"
+`k move to marker "k"
+
+Deleting
+	d'k delete from current line to line of marker "k" (deletes complete lines inclusive)
+	d`k delete from currect position to marker "k" (does not delete marker k character)
+
+
+
+
+
+
+MOVING AROUND
+
+Moving Cursor
+	h		move left
+	j		move down
+	k		move up
+	l		move right
+	H		move to top of the screen
+	M		move to middle of the screen
+	L		move to bottom of the screen
+	+		move to beginning of next line
+	-		move to beginning of previous line
+	gg		move to the beginning of file
+	G		move to the end of file
+	:<line>	move to <line>
+	<line>G	move to <line>
+
+Scrolling
+	ctrl+f	scroll forward a page
+	ctrl+b	scroll back a page
+	ctrl+d	scroll forward half page
+	ctrl+u	scroll back half page
+	ctrl+e	scroll forward a line
+	ctrl+y	scroll back a line
+
+
+
+
+
+
+
+MULTIPLE FILES
+
+Using buffers
+    :e <file>   open file
+    :ls         list open buffers
+    :bp         previous buffer
+    :bn         next buffer
+    :b<#>       move to nth buffer
+    :b <file>   move to file
+
+Using tabs
+    :tabe <filename>          open file in new tab
+    :tabf <search_param>        search files in current path and opens it in new tab (* wildcard)
+    :tabn                       next tab
+    :tabp                       previous tab
+    :tabfir                     first tab
+    :tablast                    last tab
+    :tabs                       see open tabs
+    :tabm                       move current tab to last spot
+    :tabm <#>                   rearrange tab to # position (base 0)
+    :tabdo <command>            execute command in all tabs (ex: :tabdo %s/foo/bar/g)
+
+    $ vim -p <file1> <file2>    files separated in tabs at startup
+
+    :set tabpagemax=<#>         change maximum number of tags
+    :set showtabline=2          show tab labels on window top (0 to turn it off)
+
+
+
+
+
+
+RECORDING
+
+1 Start recording		q<lower case character>
+2 Perform actions
+3 Stop recording		q
+4 Play					@<lower case character>
+
+
+
+
+
+SEARCH AND REPLACE
+
+Basic form:
+:s/foo/bar/g		Change each foo to bar in the current line.
+
+Ranges:
+:s/****				Current line.
+:%s/****			Change each foo to bar in all lines.
+:5,12s/****			From line 5 to 12 inclusive.
+:'a,'bs/****		All lines from mark a to mark b inclusive.
+:.,$s/****			From current line to last line inclusive.
+:.,+2s/****			Current line and the next 2 lines.
+:g^/baz/s/****		In each lines starting with baz.
+
+****/				Replace the first occurence.
+****/g				Replace all occurences.
+****/gc				Ask for confirmation.
+****/gi				Case insensitive.
+****/gI				Case sensitive.
+
+:s/\<foo\>/****		Search for whole word foo.
+
+Searching:
+. * \ [ ] ^ $		Metacharacters.
++ ? | { } ( )		Must be escaped to use special function.
+\/					Is / (use it to search for forward slash).
+\t					Tab.
+\s					Whitespace.
+\n					New line.
+\r					Carriage return.
+\{#}				Repetition. /foo.\{2} matches foo and the next 2 characters.
+
+Replacing:
+\r					New line
+\n					Null byte.
+\&					Is ampersand.
+&					Is the text that matches the search pattern.
+
+
+
+
+
+
+SESSIONS
+
+Save current session
+    :mksession! ~/.<session_name>
+
+Restore session
+    $ vim -S ~/.<session_name>
+	
+
+
+
+
+
+SPLIT SCREEN
+
+Split screen
+	:sp o :split	horizontal
+	:vsp o :vsplit	vertical
+
+Split screen and open file
+	(:sp o :split) filename -> horizontal
+	(:vsp o :vsplit) filename -> vertical
+
+Switch between splitscreens
+	ctrl+w w -> next
+	ctrl+w W -> previous
+
+Resize splitted screen
+	Vertical
+		ctrl+w +    -> increase
+		ctrl+w -    -> decrease
+		10 ctrl+w + -> increase 10
+	Horizontal
+		ctrl+w >    -> increase
+		ctrl+w <    -> decrease
+		10 ctrl+w > -> increase 10 
+
+Close splitted screen
+	Place in screen you wish to close
+		:q
+
+
+
+
+
+
+TIPS
+
+ctrl a		Increment number by 1
+ctrl z		Decrement number by 1
+
+
+
+
+
+
+REFERENCES
+
+http://www.cs.swarthmore.edu/help/vim/
