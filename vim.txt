@@ -1,5 +1,6 @@
 VIM
 
+NAVIGATION
 CHANGE TO UPPERCASE/LOWERCASE
 COPY, CUT AND PASTE
 	TO/FROM CLIPBOARD
@@ -14,6 +15,34 @@ SESSIONS
 SPLIT SCREEN
 TIPS
 REFERENCES
+
+
+
+
+
+NAVIGATION
+
+Line Navigation
+	k – navigate upwards
+	j – navigate downwards
+	l – navigate right side
+	h – navigate left side
+
+	0 – go to the starting of the current line.
+	^ – go to the first non blank character of the line.
+	$ – go to the end of the current line.
+	g_ – go to the last non blank character of the line.
+
+Screen Navigation
+	H – Go to the first line of current screen.
+	M – Go to the middle line of current screen.
+	L – Go to the last line of current screen.
+	ctrl+f – Jump forward one full screen.
+	ctrl+b – Jump backwards one full screen
+	ctrl+d – Jump forward (down) a half screen
+	ctrl+u – Jump back (up) one half screen
+
+
 
 
 
@@ -137,29 +166,53 @@ Deleting
 
 MOVING AROUND
 
-Moving Cursor
+Line Moving
 	h		move left
 	j		move down
 	k		move up
 	l		move right
-	H		move to top of the screen
-	M		move to middle of the screen
-	L		move to bottom of the screen
-	+		move to beginning of next line
-	-		move to beginning of previous line
-	gg		move to the beginning of file
-	G		move to the end of file
+	H		top of the screen
+	M		middle of the screen
+	L		bottom of the screen
+	+		beginning of next line
+	-		beginning of previous line
+	gg		the beginning of file
+	G		the end of file
 	:<line>	move to <line>
 	<line>G	move to <line>
+	N%		move to Nth percentage line of the file
+	N|		move to Nth column in line
+	
+Word Moving
+	e		end of current word
+	E		end of current WORD (non blank characters)
+	b		previous word
+	B		previous WORD (non blank characters)
+	w		next word
+	W		next WORD (non blank characters)
+
+Paragraph Moving
+	{		beginning of current paragraph
+	}		end of current paragraph
 
 Scrolling
-	ctrl+f	scroll forward a page
-	ctrl+b	scroll back a page
-	ctrl+d	scroll forward half page
-	ctrl+u	scroll back half page
-	ctrl+e	scroll forward a line
-	ctrl+y	scroll back a line
+	ctrl+f		forward a page
+	ctrl+b		back a page
+	ctrl+d		forward half page
+	ctrl+u		back half page
+	ctrl+e		forward a line
+	ctrl+y		back a line
 
+Special
+	%		go to matching braces
+	ctrl+O		go to previous location (like history)
+	ctrl+I		go to next location (like history)
+	:jumps		show location history
+
+From Command Line
+	vim +<line> file	go to <line> after openning file
+	vim +/<pattern> file	go to first match of <pattern> after openning file
+	vim +?<pattern> file	go to first match from last of <pattern> after openning file
 
 
 
