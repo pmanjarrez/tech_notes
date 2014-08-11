@@ -1,0 +1,3 @@
+# Choose java version
+
+sudo update-alternatives --confg java

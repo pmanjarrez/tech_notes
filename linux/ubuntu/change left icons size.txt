@@ -1,0 +1,3 @@
+Range is from 32 to 64
+
+$ gconftool-2 -s -t integer /apps/compiz-1/plugins/unityshell/screen0/options/icon_size 32

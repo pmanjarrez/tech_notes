@@ -1,0 +1,2 @@
+pedrom@majarrez:/proc$ cat /etc/modprobe.d/touchpad.conf 
+options psmouse proto=imps

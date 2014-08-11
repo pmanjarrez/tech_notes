@@ -1,0 +1,1 @@
+find . -iname *txt -type f -exec grep -il "ave" {} +

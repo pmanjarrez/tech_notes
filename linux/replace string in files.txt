@@ -1,0 +1,8 @@
+find . -type f -print | xargs sed -i 's/<oldword>/<newword>/g'
+
+If there are problems with svn detecting changes use:
+find . -type f -print | grep -v ".svn" | xargs sed -i 's/<oldword>/<newword>/g'
+
+
+Other option:
+grep -lr -e '<oldword>' * | xargs sed -i 's/<oldword>/<newword>/g'

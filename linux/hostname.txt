@@ -1,0 +1,15 @@
+Debian (permanent)
+
+/etc/hostname
+$/etc/init.d/hostname.sh start
+
+
+Red Hat (permanent)
+
+/etc/sysconfig/network
+HOSTNAME="plain.domainname.com"
+
+
+Temporarily
+
+$hostname NEW_NAME

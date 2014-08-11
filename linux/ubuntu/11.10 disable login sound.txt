@@ -1,0 +1,4 @@
+gksudo gedit /usr/share/gnome/autostart/libcanberra-login-sound.desktop
+
+At the end of the file:
+Nodisplay=false

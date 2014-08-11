@@ -1,0 +1,121 @@
+SVN
+
+UNDO A COMMITTED CHANGE
+RESURRECT A DELETED ITEM
+BRANCHING
+
+
+Checkout
+
+$ svn co/checkout url_path
+	$ svn co svn://srv/parent_path/path
+		path/file1
+		path/file2
+		...
+	$ svn co svn::/srv/parent_path .
+		path/file1
+		path/file2
+		...
+
+
+Commit
+
+$ svn ci/commit -m "message"
+$ svn ci -m "message" directory
+$ svn ci -m "message" filename
+
+
+Log
+
+$ svn log
+$ svn log -v -r version_a
+$ svn log -v -r version_a:version_b
+
+
+Differences
+
+$ svn di/diff
+$ svn di -r version_a --diff-cmd kdiff3 file_name
+$ svn di -r version_a:version_b --diff-cmd kdiff3 file_name
+$ svn di -c version
+
+
+
+
+
+UNDO A COMMITTED CHANGE
+
+1 $ svn merge -c -<rev_just_committed> ^/<path_in_repository>
+	or svn merge -r <current_rev_wrong>:<prev_rev_right>
+2 Confirm everything is right (svn status, svn diff)
+3 $ svn ci -m "Undoing incorrect change."
+
+
+
+
+
+RESURRECT A DELETED ITEM
+
+- Resurrect with history -
+1 Look for the specific revision of the item you wish to resurrect. (svn log --v)
+	- The revision that will be used is the immediate before when the item was deleted -
+2 $ svn copy ^/<item_to_resurrect>@<last_rev_when_item_existed> <item_to_resurrect>
+or
+2 $ svn copy ^/<item_to_resurrect>@<last_rev_where_file_existed> ^/<item_to_resurrect>
+3 svn ci -m "Resurrected <item_to_resurrect> from revision <last_rev_when_item_existed>
+
+- Resurrect without history -
+1 Look for the specific revision of the item you wish to resurrect. (svn log --v)
+	- The revision that will be used is the immediate before when the item was deleted -
+2 svn cat ^/<item_to_resurrect>@<last_rev_when_item_existed> > <item_ro_resurrect>
+3 $ svn add <item_to_resurrect>
+4 svn ci -m "Re-created <item_to_resurrect> from revision <last_rev_when_item_existed>."
+
+
+
+
+
+BRANCHING
+
+- Basic steps -
+1 Create branch
+	(in trunk wd)
+	$ svn copy ^/trunk ^/branches/<new_branch> -m "Creating a new branch of /trunk."
+2 Switch to branch to start working
+	$ svn sw ^/branches/<new_branch>
+	(or checkout new branch into a new directory)
+3 Keep branch synced with trunk
+	make sure working copy is "clean" (no local modifications)
+		$ svn status (should give a blank output)
+	$ svn merge ^/trunk
+	resolve any conflict that might raise
+	$ svn update
+	$ svn ci -m "Merged latest trunk changes to new_branch"
+4 Reintegrate branch into trunk
+	sync branch with trunk (see step 3) and make sure branch is "clean"
+	switch to trunk (or checkout trunk into a new directory)
+		$ svn sw ^/trunk
+	make sure working copy (trunk) is "clean" (no local modifications)
+		$ svn status (should give a blank output)
+	$ svn merge --reintegrate ^/branches/<new_branch>
+	build, test, verify...
+	$ svn ci "Merged new branch back into trunk."
+5 Remove branch. (optional)
+	$ svn rm ^/branches/<new_branch> -m "Removed branch."
+
+- How to know where this branch was originated from -
+$ svn log --stop-on-copy -v -l 1 -r1:HEAD <path_to_branch>
+
+- Merge a specific version from trunk to branch - (cherrypicking)
+1 Identify specific revision you want to merge. (svn log, svn di)
+2 $ svn merge -c <rev_to_merge> ^/trunks
+
+- Facts -
+- Repository root, can't be neither source nor target in merging.
+- Reintegration can't be made unless directories are ancestrally related. (branch from ^/trunk/server can only be reintegrated in ^/trunk/server)
+- Syncing trunk to branch using an incorrect tree
+		ie: branch is from ^/trunk/H1.6/server
+		sync in branch using $ svn merge ^/trunk/H1.6
+	There will be tree conflicts, revert with: (in working copy base directory)
+	$ svn revert . -R
+	$ svn status (should be clean)

@@ -1,0 +1,143 @@
+CONFIGURATIONS
+INITIATE A REPOSITORY
+CLONE A REPOSITORY
+ADD FILES FOR TRACKING
+STAGE A FILE
+VIEW CHANGES UNSTAGED
+VIEW CHANGES STAGED
+DISCARD CHANGES NOT STAGED
+COMMIT CHANGES
+COMMIT UNSTAGED CHANGES
+REMOVE FILES
+MOVE FILES
+IGNORE FILES
+VIEW LOG
+
+
+CONFIGURATIONS
+
+git config --global user.name "Pedro Manjarrez"
+
+--system (/etc/gitconfig)
+--global (~/.gitconfig)
+         (.git/config)
+
+user.name
+user.email
+merge.tool
+color....
+core.editor
+
+
+INITIATE A REPOSITORY
+
+In directory that has files you want to track
+git init
+
+
+CLONE A REPOSITORY
+
+git clone <url> (<dir_name>)
+
+
+ADD FILES FOR TRACKING
+
+git add <file>
+
+
+STAGE A FILE
+
+git add <file>
+
+
+VIEW CHANGES UNSTAGED
+
+git diff (<file>)
+- compares against staged or commited
+
+
+VIEW CHANGES STAGED
+
+git diff --staged (<file>)
+
+
+DISCARD CHANGES NOT STAGED
+
+git checkout -- <file>
+
+
+COMMIT CHANGES
+
+git commit
+
+
+COMMIT UNSTAGED CHANGES
+
+git commit -a
+
+
+REMOVE FILES
+
+git rm
+- marks to delete in staging area (also deletes from disk)
+
+rm
+git add/rm
+- need to tell git to remove the file
+
+
+MOVE FILES
+
+git mv <old> <new>
+
+
+IGNORE FILES
+
+Create .gitignore file
+
+
+VIEW LOG
+
+git log
+
+git log -p
+- view diff introduced in commit
+
+git log -p --word-diff
+- differences in word level
+
+git log --stat
+- show abbreviated stats for each commit
+
+git log --pretty=<oneline|short|full|fuller>
+- other predefined formats
+
+git log --pretty=format:"%h ..."
+- personalized format
+%H 	Commit hash
+%h 	Abbreviated commit hash
+%T 	Tree hash
+%t 	Abbreviated tree hash
+%P 	Parent hashes
+%p 	Abbreviated parent hashes
+%an 	Author name
+%ae 	Author e-mail
+%ad 	Author date (format respects the --date= option)
+%ar 	Author date, relative
+%cn 	Committer name
+%ce 	Committer email
+%cd 	Committer date
+%cr 	Committer date, relative
+%s 	Subject
+
+git log --graph
+- show ascii graph with branch and merge history (commonly used altoghether with oneline)
+
+git log --abbrev-commit
+- show only first few characters from hash
+
+git log --oneline
+- shortcut for --abbrev-commit and --pretty=oneline
+
+git log -2
+- limit to first two entries

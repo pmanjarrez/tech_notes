@@ -1,0 +1,46 @@
+MYSQLDUMP
+
+
+BACKUP DATABASE
+BACKUP TABLE
+RESTORE DATABASE
+TIPS
+
+
+
+
+BACKUP DATABASE
+
+Single
+    $ mysqldump -u <user> -p<password> <db> > dumpfile.sql
+
+Multipĺe
+    $ mysqldump -u <user> -p<password> --databases <db1> <db2> <...> > dumpfile.sql
+
+All
+    $ mysqldump -u <user> -p<password> --all-databases > dumpfile.sql
+
+
+
+
+BACKUP TABLE
+
+$ mysqldump -u <user> -p<password> <db> <table> > dumpfile.sql
+
+
+
+
+RESTORE DATABASE
+
+(Database must exist before performing restore)
+	mysql> create database [db];
+$ mysql -u <user> -p<password> <db> < dumpfile.sql
+
+
+
+
+TIPS
+
+Backup and Restore at the Same Time
+<db2> must exists.
+$ mysqldump -u <user> -p<password> <db1> > dumpfile.sql && mysql -u <user> -p<password> <db2> < dumpfile.sql

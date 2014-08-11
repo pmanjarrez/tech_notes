@@ -1,0 +1,41 @@
+QUICK RVM GUIDE
+
+INSTALLATION
+RUBIES
+	LIST RUBIES
+	INSTALL RUBY
+GEMS
+	INSTALL
+
+
+
+
+INSTALLATION
+
+\curl -L https://get.rvm.io | bash -s stable
+
+
+
+RUBIES
+
+LIST RUBIES
+rvm list known
+
+INSTALL RUBY
+rvm install
+
+SWITCH RUBY
+rvm 1.9.7
+
+To system
+rvm use system
+
+SET DEFAULT
+rvm --default use 1.9.3
+
+
+
+GEMS
+
+INSTALL
+rvm rubygems current
