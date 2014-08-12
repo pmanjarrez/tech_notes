@@ -207,6 +207,7 @@ Special
 	%		go to matching braces
 	ctrl+O		go to previous location (like history)
 	ctrl+I		go to next location (like history)
+	TAB		same as ctrl+I
 	:jumps		show location history
 
 From Command Line
