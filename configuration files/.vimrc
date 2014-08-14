@@ -51,6 +51,9 @@ if &term=="xterm"
     set t_Sb=^[[4%dm
     set t_Sf=^[[3%dm
 endif
+
+" Set map leader to space
+let mapleader=" "
     
 " Tabs and indentation
 set autoindent
@@ -76,11 +79,15 @@ endif
 set nu
 
 " Mapping to navigate through tabs
-nnoremap th  :tabfirst<CR>
-nnoremap tj  :tabnext<CR>
-nnoremap tk  :tabprev<CR>
-nnoremap tl  :tablast<CR>
-nnoremap tt  :tabedit<Space>
-nnoremap tn  :tabnext<Space>
-nnoremap tm  :tabm<Space>
-nnoremap td  :tabclose<CR>
+nnoremap <leader>th  :tabfirst<CR>
+nnoremap <leader>tj  :tabnext<CR>
+nnoremap <leader>tk  :tabprev<CR>
+nnoremap <leader>tl  :tablast<CR>
+nnoremap <leader>tt  :tabedit<Space>
+nnoremap <leader>tn  :tabnext<Space>
+nnoremap <leader>tm  :tabm<Space>
+nnoremap <leader>td  :tabclose<CR>
+
+" Mapping execution commands
+nnoremap <leader>r :!%:p
+nnoremap <leader>R :!%:p<CR>
