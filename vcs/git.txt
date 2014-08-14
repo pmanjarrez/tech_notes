@@ -2,17 +2,33 @@ GIT
 
 CONFIGURATIONS
 INITIATE A REPOSITORY
-CLONE A REPOSITORY
+WORKING WITH REMOTES
+	Clone a Repository
+	Adding Remotes
+	Showing Remotes
+	Inspect a Remote
+	Fetch Data from Remote
+	Push to Remote
+	Renaming Remotes
+	Deleting Remotes
 ADD FILES FOR TRACKING
 STAGE A FILE
-VIEW CHANGES UNSTAGED
-VIEW CHANGES STAGED
-DISCARD CHANGES NOT STAGED
+VIEW STATUS
+	View Changes Unstaged
+	View Changes Staged
 COMMIT CHANGES
 UNDOING THINGS
+	Redoing a Commit
+	Unstage a File
+	Unmodifying a Modified File
 REMOVE FILES
 MOVE FILES
 IGNORE FILES
+TAGS
+	List Tags
+	Create Annotated Tags
+	Create Lightweight Tags
+	Sharing Tags
 VIEW LOG
 
 
@@ -30,6 +46,7 @@ user.email
 merge.tool
 color....
 core.editor
+alias.co commit
 
 
 
@@ -40,9 +57,34 @@ git init
 
 
 
-CLONE A REPOSITORY
+WORKING WITH REMOTES
 
+Clone a Repository
 git clone <url> (<dir_name>)
+
+Adding Remotes
+git remote add <shortname> <url>
+
+Showing Remotes
+git remote -v
+
+Inspect a Remote
+git remote show <remote>
+
+Fetch Data from Remote
+git fetch <remote name>
+	it doesn't merge changes
+git pull 
+	pull and merge changes from remote branch
+
+Push to Remote
+git push <remote> <branch>
+
+Renaming Remotes
+git remote rename <old> <new>
+
+Deleting Remotes
+git remote rm <name>
 
 
 
@@ -58,22 +100,28 @@ git add <file>
 
 
 
-VIEW CHANGES UNSTAGED
+VIEW STATUS
 
+git status
+-v, --verbose         be verbose
+-s, --short           show status concisely
+-b, --branch          show branch information
+--porcelain           machine-readable output
+--long                show status in long format (default)
+-z, --null            terminate entries with NUL
+-u, --untracked-files[=<mode>]
+                      show untracked files, optional modes: all, normal, no. (Default: all)
+--ignored             show ignored files
+--ignore-submodules[=<when>]
+                      ignore changes to submodules, optional when: all, dirty, untracked. (Default: all)
+--column[=<style>]    list untracked files in columns
+
+View Changes Unstaged
 git diff (<file>)
 - compares against staged or commited
 
-
-
-VIEW CHANGES STAGED
-
+View Changes Staged
 git diff --staged (<file>)
-
-
-
-DISCARD CHANGES NOT STAGED
-
-git checkout -- <file>
 
 
 
@@ -89,7 +137,6 @@ git commit -a
 UNDOING THINGS
 
 Redoing a Commit
-
 git commit --amend
 - redo the last commit but reading the staging area again
 	you can make changes like (will result in a single commit)
@@ -125,6 +172,27 @@ git mv <old> <new>
 IGNORE FILES
 
 Create .gitignore file
+
+
+
+TAGS
+
+List Tags
+git tag
+
+Create Annotated Tags
+git tag -a <name>
+
+Create Lightweight Tags
+git tag <name>
+
+Tag Later
+git tag -a <name> <checksum>
+
+Sharing Tags
+git push origin <tag>
+git push origin --tags
+	pull all your tags
 
 
 
